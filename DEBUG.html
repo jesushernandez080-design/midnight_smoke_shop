@@ -1,0 +1,140 @@
+<!-- DEBUG TEST PAGE -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Debug Test</title>
+  <style>
+    body { background: #1a1a1a; color: white; font-family: Arial; padding: 20px; }
+    .test { margin: 10px 0; padding: 10px; background: #333; border-radius: 4px; }
+    .pass { color: #0f0; }
+    .fail { color: #f00; }
+    button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>🔍 Admin Dashboard - Debug Test</h1>
+  
+  <div class="test">
+    <h3>Step 1: Check HTML Elements</h3>
+    <button onclick="testElements()">Test Elements</button>
+    <div id="result1"></div>
+  </div>
+  
+  <div class="test">
+    <h3>Step 2: Open Admin Modal</h3>
+    <button onclick="testOpenAdmin()">Open Admin Modal</button>
+    <div id="result2"></div>
+  </div>
+  
+  <div class="test">
+    <h3>Step 3: Test Login</h3>
+    Email: <input type="email" id="testEmail" value="admin@midnight.shop"><br>
+    Password: <input type="password" id="testPass" value="password"><br>
+    <button onclick="testLogin()">Test Login</button>
+    <div id="result3"></div>
+  </div>
+  
+  <div class="test">
+    <h3>Step 4: Check Admin Panel Visibility</h3>
+    <button onclick="testPanelVisibility()">Check Panels</button>
+    <div id="result4"></div>
+  </div>
+
+  <script>
+    function log(id, text, isPass = true) {
+      const el = document.getElementById(id);
+      const color = isPass ? 'pass' : 'fail';
+      el.innerHTML += `<p class="${color}">${isPass ? '✓' : '✗'} ${text}</p>`;
+    }
+
+    function testElements() {
+      document.getElementById('result1').innerHTML = '';
+      
+      const elements = {
+        'adminModal': document.getElementById('adminModal'),
+        'adminAccessBtn': document.getElementById('adminAccessBtn'),
+        'adminLoginForm': document.getElementById('adminLoginForm'),
+        'adminProductsPanel': document.getElementById('adminProductsPanel'),
+        'productForm': document.getElementById('productForm'),
+        'productsList': document.getElementById('productsList'),
+      };
+
+      Object.entries(elements).forEach(([name, el]) => {
+        log('result1', `${name}: ${el ? 'FOUND' : 'MISSING'}`, !!el);
+      });
+    }
+
+    function testOpenAdmin() {
+      document.getElementById('result2').innerHTML = '';
+      try {
+        const modal = document.getElementById('adminModal');
+        if (modal) {
+          modal.style.display = 'flex';
+          log('result2', 'Admin modal opened', true);
+          log('result2', `Modal display: ${modal.style.display}`, true);
+        } else {
+          log('result2', 'Admin modal not found', false);
+        }
+      } catch(e) {
+        log('result2', `Error: ${e.message}`, false);
+      }
+    }
+
+    function testLogin() {
+      document.getElementById('result3').innerHTML = '';
+      try {
+        const email = document.getElementById('testEmail').value;
+        const pass = document.getElementById('testPass').value;
+        
+        if (email === 'admin@midnight.shop' && pass.length >= 6) {
+          localStorage.setItem('test_admin', 'true');
+          log('result3', 'Login validation passed', true);
+          log('result3', `Email: ${email}`, true);
+          log('result3', `Password length: ${pass.length}`, true);
+        } else {
+          log('result3', 'Login validation failed', false);
+          log('result3', `Email match: ${email === 'admin@midnight.shop'}`, email === 'admin@midnight.shop');
+          log('result3', `Password length: ${pass.length} (need >= 6)`, pass.length >= 6);
+        }
+      } catch(e) {
+        log('result3', `Error: ${e.message}`, false);
+      }
+    }
+
+    function testPanelVisibility() {
+      document.getElementById('result4').innerHTML = '';
+      try {
+        const loginPanel = document.getElementById('adminLoginPanel');
+        const productsPanel = document.getElementById('adminProductsPanel');
+        const inventoryPanel = document.getElementById('adminInventoryPanel');
+        const usersPanel = document.getElementById('adminUsersPanel');
+        
+        const panels = {
+          'Login Panel': loginPanel,
+          'Products Panel': productsPanel,
+          'Inventory Panel': inventoryPanel,
+          'Users Panel': usersPanel,
+        };
+
+        Object.entries(panels).forEach(([name, panel]) => {
+          if (panel) {
+            const isHidden = panel.classList.contains('hidden');
+            log('result4', `${name}: ${isHidden ? 'HIDDEN' : 'VISIBLE'}`, !isHidden || name === 'Products Panel');
+          } else {
+            log('result4', `${name}: NOT FOUND`, false);
+          }
+        });
+      } catch(e) {
+        log('result4', `Error: ${e.message}`, false);
+      }
+    }
+
+    // Auto-run on load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        testElements();
+      }, 500);
+    });
+  </script>
+</body>
+</html>

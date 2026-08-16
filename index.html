@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Midnight Smoke Shop — Nocturnal Design. Curated Selection. VIP Experiences.</title>
+    <meta name="description" content="Premium smoke shop with exclusive VIP access, curated products, and luxury experiences." />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Age Verification Modal -->
+    <div id="ageVerificationModal" class="modal" style="display:flex;z-index:9999">
+      <div class="modal-content" style="max-width:400px;text-align:center">
+        <h2 style="color:var(--accent);margin-bottom:16px">Age Verification</h2>
+        <p style="color:var(--muted);margin-bottom:24px;line-height:1.6">
+          You must be <strong style="color:var(--accent)">21 years or older</strong> to enter this site.<br><br>
+          Midnight Smoke Shop sells age-restricted tobacco and nicotine products.
+        </p>
+        <div style="display:flex;gap:12px;justify-content:center">
+          <button id="ageYesBtn" class="btn primary" style="flex:1">✅ I am 21+</button>
+          <button id="ageNoBtn" class="btn outline" style="flex:1">❌ I'm Under 21</button>
+        </div>
+        <p style="font-size:11px;color:var(--muted);margin-top:16px">
+          By clicking 'I am 21+', you confirm that you are of legal age to purchase tobacco products in your state.
+        </p>
+      </div>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#home" aria-label="Midnight Smoke Shop">
+          <img src="midnight.PNG" alt="Midnight Smoke Shop" onerror="this.onerror=null;this.src='midnight.svg'" />
+        </a>
+        <nav class="main-nav">
+          <a href="#home">Home</a>
+          <a href="#catalog">Catalog</a>
+          <a href="#vip">VIP Access</a>
+        </nav>
+        <div class="actions">
+          <button id="loginBtn" class="btn ghost" aria-label="Log in">Log in</button>
+          <button id="registerBtn" class="btn outline" aria-label="Create account">Register</button>
+          <button id="vipBtn" class="btn vip" aria-label="VIP Access">VIP Access</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tobacco Disclaimer Banner -->
+    <div style="background:rgba(255,180,0,0.1);border-bottom:1px solid rgba(255,180,0,0.2);padding:12px;text-align:center;color:var(--muted);font-size:12px">
+      ⚠️ <strong>Age Restricted Products</strong> — This site contains tobacco and nicotine products. Must be 21+ to purchase. See our full disclosure.
+    </div>
+
+    <main>
+      <!-- Hero Section -->
+      <section id="home" class="hero">
+        <div class="container hero-inner">
+          <h1>Midnight Smoke Shop</h1>
+          <p class="subtitle">Nocturnal design. Curated selection. VIP experiences.</p>
+          <div class="hero-cta">
+            <a href="#catalog" class="btn primary">Explore Catalog</a>
+            <button id="heroVipBtn" class="btn ghost" aria-label="Learn about VIP">Learn More</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Catalog Section -->
+      <section id="catalog" class="catalog-section">
+        <div class="container">
+          <h2 class="section-title">Our Collection</h2>
+          
+          <!-- Category Tabs -->
+          <div class="catalog-tabs" role="tablist" aria-label="Product categories">
+            <button class="tab-btn active" data-category="all" role="tab" aria-selected="true">All Products</button>
+            <button class="tab-btn" data-category="vapes" role="tab" aria-selected="false">Vapes</button>
+            <button class="tab-btn" data-category="accessories" role="tab" aria-selected="false">Accessories</button>
+            <button class="tab-btn" data-category="concentrates" role="tab" aria-selected="false">Concentrates</button>
+            <button class="tab-btn" data-category="vip" role="tab" aria-selected="false">VIP Line</button>
+          </div>
+
+          <!-- Products Grid -->
+          <div class="grid" id="productsGrid" role="tabpanel">
+            <!-- Products dynamically inserted here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- VIP Access Section -->
+      <section id="vip" class="vip-section">
+        <div class="container">
+          <h2 class="section-title">VIP Membership</h2>
+          <div class="vip-benefits">
+            <div class="benefit-card">
+              <h3>Exclusive Deals</h3>
+              <p>Member-only pricing on select premium products.</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Early Access</h3>
+              <p>First access to new releases and limited editions.</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Private Collections</h3>
+              <p>Handpicked curated selections reserved for VIP members.</p>
+            </div>
+            <div class="benefit-card">
+              <h3>Concierge Support</h3>
+              <p>Dedicated customer support via email and phone.</p>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:28px">
+            <button class="btn primary" id="vipCta">Request VIP Invitation</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIP EXCLUSIVE MENU (Only for VIP Members) -->
+      <section id="vipExclusiveMenu" class="vip-exclusive-section" style="display:none">
+        <div class="container">
+          <div class="vip-exclusive-header">
+            <h2 class="section-title">✨ VIP Exclusive Menu</h2>
+            <p style="color:var(--accent);font-size:14px;margin-top:8px">Premium access for our most valued members</p>
+          </div>
+          
+          <div class="vip-menu-grid">
+            <div class="vip-menu-card">
+              <div class="vip-menu-icon">🎁</div>
+              <h3>Exclusive Products</h3>
+              <p>Access limited edition items not available to the public.</p>
+              <button class="btn primary" onclick="document.querySelector('[data-category=\"vip\"]').click()">Browse VIP Line</button>
+            </div>
+            
+            <div class="vip-menu-card">
+              <div class="vip-menu-icon">💜</div>
+              <h3>VIP Rewards</h3>
+              <p>Earn points on every purchase. Redeem for discounts and exclusive gifts.</p>
+              <button class="btn primary">View Rewards</button>
+            </div>
+            
+            <div class="vip-menu-card">
+              <div class="vip-menu-icon">🔔</div>
+              <h3>Early Access</h3>
+              <p>Be the first to know about new releases and flash sales.</p>
+              <button class="btn primary">Notification Settings</button>
+            </div>
+            
+            <div class="vip-menu-card">
+              <div class="vip-menu-icon">📞</div>
+              <h3>Concierge Support</h3>
+              <p>Get priority support from our dedicated VIP team.</p>
+              <button class="btn primary">Contact Concierge</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section class="about-section">
+        <div class="container">
+          <h2 class="section-title">Our Philosophy</h2>
+          <p class="about-text">Midnight Smoke Shop celebrates the nocturnal and the sophisticated: handpicked products for authentic moments, curated experiences for discerning tastes, and a commitment to excellence in every interaction.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h4 style="color:var(--accent);margin-bottom:12px">Midnight Smoke Shop</h4>
+            <p style="font-size:13px;color:var(--muted)">📍 145 Stanley St, New Britain, CT 06051</p>
+            <p style="font-size:13px;color:var(--muted)">📞 <a href="tel:+1-860-893-3561" style="color:var(--accent);text-decoration:none">+1 (860) 893-3561</a></p>
+            <p style="font-size:13px;color:var(--muted)">📧 <a href="mailto:info@midnightsmokeshop.com" style="color:var(--accent);text-decoration:none">info@midnightsmokeshop.com</a></p>
+          </div>
+
+          <div class="footer-section">
+            <h4 style="color:var(--accent);margin-bottom:12px">Síguenos</h4>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              <a href="https://www.instagram.com/midnight_smoke_shop?igsh=MTlhOGlnZ2k2OHljNg==" target="_blank" style="color:var(--accent);text-decoration:none;font-size:13px" title="Instagram">📱 Instagram</a>
+              <a href="#" style="color:var(--muted);text-decoration:none;font-size:13px;opacity:0.6" title="TikTok">🎵 TikTok</a>
+              <a href="#" style="color:var(--muted);text-decoration:none;font-size:13px;opacity:0.6" title="Facebook">👍 Facebook</a>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <p style="font-size:12px;color:var(--muted)">&copy; <span id="year"></span> Midnight Smoke Shop — All rights reserved.</p>
+            <div style="margin-top:12px">
+              <button id="creatorBtn" class="creator-btn" style="font-size:11px">Created by Jh Software Studio</button>
+            </div>
+          </div>
+
+          <div class="footer-admin">
+            <button id="adminAccessBtn" class="btn ghost" style="font-size:12px">Admin</button>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Legal Disclaimer -->
+    <div style="background:rgba(6,6,8,0.6);border-top:1px solid rgba(155,60,255,0.1);padding:32px 20px;margin-top:40px">
+      <div class="container" style="max-width:900px">
+        <h4 style="color:var(--accent);margin-bottom:16px;font-size:14px">⚠️ Important Legal Notice</h4>
+        <div style="color:var(--muted);font-size:12px;line-height:1.8;display:grid;gap:12px">
+          <p>
+            <strong>Age Restriction:</strong> Midnight Smoke Shop sells age-restricted tobacco and nicotine products. 
+            Customers must be 21 years of age or older to purchase. We verify age at purchase.
+          </p>
+          <p>
+            <strong>Health Warning:</strong> Tobacco and nicotine products are addictive and harmful to health. 
+            These products can cause cancer, heart disease, and other serious health conditions. 
+            Pregnant women should not use tobacco or nicotine products.
+          </p>
+          <p>
+            <strong>No Medical Claims:</strong> Products sold on this site are not intended to diagnose, treat, cure, 
+            or prevent any disease. We make no health or medical claims about our products.
+          </p>
+          <p>
+            <strong>Local Laws:</strong> Customers are responsible for ensuring their purchases comply with local, 
+            state, and federal laws. Some products may be restricted or prohibited in certain jurisdictions.
+          </p>
+          <p style="font-size:11px;opacity:0.8">
+            By accessing and using this website, you confirm that you are at least 21 years old and agree to our terms.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal" aria-hidden="true">
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+        <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+        <div class="auth-tabs">
+          <button id="tabLogin" class="tab active" role="tab" aria-selected="true">Log in</button>
+          <button id="tabRegister" class="tab" role="tab" aria-selected="false">Register</button>
+        </div>
+        <div class="auth-body">
+          <form id="loginForm" class="auth-form">
+            <h3 id="authTitle">Log in</h3>
+            <div class="form-row">
+              <label for="loginEmail">Email</label>
+              <input id="loginEmail" type="email" required />
+            </div>
+            <div class="form-row">
+              <label for="loginPassword">Password</label>
+              <input id="loginPassword" type="password" required minlength="6" />
+            </div>
+            <p class="form-msg" id="loginMsg"></p>
+            <div class="form-actions">
+              <button type="submit" class="btn primary">Sign in</button>
+            </div>
+          </form>
+
+          <form id="registerForm" class="auth-form hidden">
+            <h3>Register</h3>
+            <div class="form-row">
+              <label for="regName">Full Name</label>
+              <input id="regName" type="text" required />
+            </div>
+            <div class="form-row">
+              <label for="regEmail">Email</label>
+              <input id="regEmail" type="email" required />
+            </div>
+            <div class="form-row">
+              <label for="regPassword">Password</label>
+              <input id="regPassword" type="password" required minlength="6" />
+            </div>
+            <p class="form-msg" id="regMsg"></p>
+            <div class="form-actions">
+              <button type="submit" class="btn primary">Create account</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIP Modal -->
+    <div id="vipModal" class="modal" aria-hidden="true">
+      <div class="modal-content vip-modal-content" role="dialog" aria-modal="true" aria-labelledby="vipModalTitle">
+        <button class="modal-close vip-close" aria-label="Close">×</button>
+        <h3 id="vipModalTitle">VIP Membership</h3>
+        <p class="form-msg" id="vipMsg"></p>
+        
+        <!-- VIP Benefits (for non-members) -->
+        <div id="vipBenefits" style="display:none">
+          <p>Become VIP and enjoy exclusive benefits:</p>
+          <ul style="text-align:left">
+            <li>✓ 20% off all products</li>
+            <li>✓ Early access to new releases</li>
+            <li>✓ Free shipping on orders</li>
+            <li>✓ Exclusive member-only collections</li>
+          </ul>
+          <button class="btn primary" id="requestVipBtn" style="width:100%;margin-top:16px">📝 Request VIP Approval</button>
+        </div>
+        
+        <!-- VIP Menu (for members) -->
+        <div id="vipMenu" style="display:none">
+          <p>Welcome to VIP! Enjoy exclusive benefits:</p>
+          <ul style="text-align:left">
+            <li>✓ 20% off all products</li>
+            <li>✓ Early access to new releases</li>
+            <li>✓ Free shipping on orders</li>
+            <li>✓ Exclusive member-only collections</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Dashboard Modal -->
+    <div id="adminModal" class="modal" aria-hidden="true">
+      <div class="modal-content admin-modal-content" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+        <button class="modal-close admin-close" aria-label="Close">×</button>
+        <h3 id="adminTitle">Admin Dashboard</h3>
+        
+        <div class="admin-tabs-container">
+          <button class="admin-tab-btn active" data-panel="login">Owner Login</button>
+          <button class="admin-tab-btn" data-panel="products">Manage Products</button>
+          <button class="admin-tab-btn" data-panel="inventory">Inventory</button>
+          <button class="admin-tab-btn" data-panel="inventoryVip">Inventory VIP</button>
+          <button class="admin-tab-btn" data-panel="users">Users</button>
+          <button class="admin-tab-btn" data-panel="vipUsers">VIP Users</button>
+        </div>
+
+        <!-- Admin Login Panel -->
+        <div id="adminLoginPanel" class="admin-panel active">
+          <form id="adminLoginForm">
+            <div class="form-row">
+              <label for="adminEmail">Owner Email</label>
+              <input id="adminEmail" type="email" required />
+            </div>
+            <div class="form-row">
+              <label for="adminPassword">Password</label>
+              <input id="adminPassword" type="password" required />
+            </div>
+            <p class="form-msg" id="adminMsg"></p>
+            <button type="submit" class="btn primary">Login</button>
+          </form>
+        </div>
+
+        <!-- Products Management Panel -->
+        <div id="adminProductsPanel" class="admin-panel hidden">
+          <div class="admin-section">
+            
+            <!-- ADD/EDIT PRODUCT FORM - ALWAYS VISIBLE AT TOP -->
+            <div class="admin-section-content" style="background:linear-gradient(135deg,rgba(155,60,255,0.15),rgba(155,60,255,0.05));border:2px solid rgba(155,60,255,0.3);margin-bottom:24px;padding:20px">
+              <h3 id="formTitle" style="color:var(--accent);margin:0 0 20px 0;font-size:18px">📝 Add New Product</h3>
+              <form id="productForm">
+                
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+                  <div>
+                    <label for="prodName" style="display:block;color:var(--muted);font-size:12px;font-weight:600;margin-bottom:6px">Product Name *</label>
+                    <input id="prodName" type="text" required placeholder="e.g., Premium Vape Pro" style="width:100%;padding:12px;border-radius:6px;border:1px solid rgba(155,60,255,0.3);background:rgba(0,0,0,0.4);color:white;font-size:14px;box-sizing:border-box" />
+                  </div>
+                  <div>
+                    <label for="prodCategory" style="display:block;color:var(--muted);font-size:12px;font-weight:600;margin-bottom:6px">Category *</label>
+                    <select id="prodCategory" required style="width:100%;padding:12px;border-radius:6px;border:1px solid rgba(155,60,255,0.3);background:rgba(0,0,0,0.4);color:white;font-size:14px;box-sizing:border-box">
+                      <option value="">-- Select --</option>
+                      <option value="vapes">Vapes</option>
+                      <option value="accessories">Accessories</option>
+                      <option value="concentrates">Concentrates</option>
+                      <option value="vip">VIP Line</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+                  <div>
+                    <label for="prodPrice" style="display:block;color:var(--muted);font-size:12px;font-weight:600;margin-bottom:6px">Price ($) *</label>
+                    <input id="prodPrice" type="number" step="0.01" required placeholder="e.g., 89.99" style="width:100%;padding:12px;border-radius:6px;border:1px solid rgba(155,60,255,0.3);background:rgba(0,0,0,0.4);color:white;font-size:14px;box-sizing:border-box" />
+                  </div>
+                  <div>
+                    <label for="prodImage" style="display:block;color:var(--muted);font-size:12px;font-weight:600;margin-bottom:6px">Product Image (Optional)</label>
+                    <input id="prodImage" type="file" accept=".png,.jpg,.jpeg,.webp,.gif,.bmp,.svg+xml" style="width:100%;padding:8px;border-radius:6px;border:1px dashed rgba(155,60,255,0.4);background:rgba(0,0,0,0.2);color:var(--muted);font-size:12px;box-sizing:border-box;cursor:pointer" />
+                  </div>
+                </div>
+                
+                <div style="margin-bottom:16px">
+                  <label for="prodDesc" style="display:block;color:var(--muted);font-size:12px;font-weight:600;margin-bottom:6px">Description *</label>
+                  <textarea id="prodDesc" required placeholder="Describe your product..." style="width:100%;min-height:80px;padding:12px;border-radius:6px;border:1px solid rgba(155,60,255,0.3);background:rgba(0,0,0,0.4);color:white;font-size:14px;box-sizing:border-box;resize:vertical;font-family:inherit"></textarea>
+                </div>
+                
+                <div id="imagePreviewContainer" style="display:none;margin-bottom:16px;padding:16px;background:rgba(0,0,0,0.3);border-radius:6px">
+                  <p style="margin:0 0 8px;color:var(--muted);font-size:11px;text-transform:uppercase;font-weight:600">✓ Image Preview</p>
+                  <img id="imagePreview" src="" alt="Preview" style="max-width:150px;max-height:150px;border-radius:6px;border:1px solid rgba(155,60,255,0.2)" />
+                </div>
+                
+                <div style="display:flex;gap:12px;flex-wrap:wrap">
+                  <button type="submit" class="btn primary" style="padding:12px 28px;font-weight:600;font-size:14px;flex:1;min-width:150px">✅ Save Product</button>
+                  <button type="button" id="cancelProductBtn" class="btn ghost" style="padding:12px 28px;font-weight:600;font-size:14px">Clear Form</button>
+                </div>
+              </form>
+            </div>
+            
+            <!-- CURRENT PRODUCTS LIST -->
+            <div class="admin-section-header">
+              <h3>📦 Your Products</h3>
+            </div>
+            
+            <div class="admin-section-content">
+              <div id="productsList" class="products-list" style="min-height:200px">
+                <p style="color:var(--muted);text-align:center;padding:20px">No products yet. Fill the form above to create one!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inventory Panel -->
+        <div id="adminInventoryPanel" class="admin-panel hidden">
+          <div class="admin-section">
+            <div class="admin-section-header">
+              <h3>📦 Inventory Management</h3>
+              <p style="color:var(--muted);font-size:12px;margin:0">Edit stock levels and click Save to persist changes</p>
+            </div>
+            
+            <div class="admin-section-content">
+              <div id="noInventoryMsg" style="display:none;text-align:center;padding:30px;color:var(--muted)">
+                <p style="font-size:18px">No products in catalog yet.</p>
+                <p style="font-size:12px">Add products in the "Manage Products" tab first.</p>
+              </div>
+              
+              <div id="inventoryContainer" style="display:grid;gap:16px">
+                <!-- Inventory items render here -->
+              </div>
+              
+              <button id="saveInventoryBtn" class="btn primary" style="width:100%;margin-top:20px;display:none">💾 Save All Changes</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users & VIP Panel -->
+        <!-- Inventory VIP Panel -->
+        <div id="adminInventoryVipPanel" class="admin-panel hidden">
+          <div class="admin-section">
+            <div class="admin-section-header">
+              <h3>👑 VIP Inventory Management</h3>
+              <p style="color:var(--muted);font-size:12px;margin:0">Edit stock levels for VIP Line products</p>
+            </div>
+            
+            <div class="admin-section-content">
+              <div id="noInventoryVipMsg" style="display:none;text-align:center;padding:30px;color:var(--muted)">
+                <p style="font-size:18px">No VIP products in catalog yet.</p>
+                <p style="font-size:12px">Add VIP Line products in the "Manage Products" tab first.</p>
+              </div>
+              
+              <div id="inventoryVipContainer" style="display:grid;gap:16px">
+                <!-- VIP Inventory items render here -->
+              </div>
+              
+              <button id="saveInventoryVipBtn" class="btn primary" style="width:100%;margin-top:20px;display:none">💾 Save VIP Changes</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users Panel (Regular Users Only) -->
+        <div id="adminUsersPanel" class="admin-panel hidden">
+          <div class="admin-section">
+            <div class="admin-section-header">
+              <h3>👤 Regular Users</h3>
+            </div>
+            
+            <div class="admin-section-content" style="background:rgba(106,44,255,0.06);border:1px solid rgba(155,60,255,0.2);margin-bottom:20px">
+              <p style="color:var(--muted);font-size:12px;margin:0 0 16px">Create a demo regular user account:</p>
+              <button class="btn primary" onclick="createDemoRegularUser()" style="text-align:center;width:100%">👤 Create Regular User</button>
+              <p id="demoRegularMsg" class="form-msg" style="margin-top:12px;font-size:12px"></p>
+            </div>
+            
+            <div class="admin-section-content">
+              <h4>Registered Users</h4>
+              <ul id="regularUsersList" style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px"></ul>
+              <p id="noRegularUsersMsg" style="color:var(--muted);font-size:13px;text-align:center;padding:20px">No regular users yet.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIP Users Panel -->
+        <div id="adminVipUsersPanel" class="admin-panel hidden">
+          <div class="admin-section">
+            <div class="admin-section-header">
+              <h3>👑 VIP Members</h3>
+            </div>
+            
+            <div class="admin-section-content" style="background:rgba(106,44,255,0.06);border:1px solid rgba(155,60,255,0.2);margin-bottom:20px">
+              <p style="color:var(--muted);font-size:12px;margin:0 0 16px">Create a demo VIP member account:</p>
+              <button class="btn primary" style="background:var(--accent);text-align:center;width:100%" onclick="createDemoVIPUser()">👑 Create VIP User</button>
+              <p id="demoVipMsg" class="form-msg" style="margin-top:12px;font-size:12px"></p>
+            </div>
+            
+            <div class="admin-section-content">
+              <h4>Invite New VIP Member</h4>
+              <div style="display:flex;gap:8px;margin-bottom:20px">
+                <input id="inviteEmailInput" type="email" placeholder="member@example.com" style="flex:1" />
+                <button id="inviteBtn" class="btn primary" style="flex-shrink:0">Send Invite</button>
+              </div>
+            </div>
+
+            <div class="admin-section-content" style="background:rgba(255,180,0,0.1);border:1px solid rgba(255,180,0,0.3);margin-bottom:20px">
+              <h4 style="color:#ffb400;margin-top:0">⏳ Pending VIP Approvals</h4>
+              <ul id="pendingVipList" style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px"></ul>
+              <p id="noPendingMsg" style="color:var(--muted);font-size:13px;text-align:center;padding:20px">No pending VIP requests.</p>
+            </div>
+            
+            <div class="admin-section-content">
+              <h4>Active VIP Members</h4>
+              <ul id="inviteList" style="list-style:none;padding:0;display:flex;flex-direction:column;gap:8px"></ul>
+              <p id="noInvitesMsg" style="color:var(--muted);font-size:13px;text-align:center;padding:20px">No VIP members invited yet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Creator Modal -->
+    <div id="creatorModal" class="modal" aria-hidden="true">
+      <div class="modal-content creator-modal-content" role="dialog" aria-modal="true" aria-labelledby="creatorModalTitle">
+        <button class="modal-close creator-close" aria-label="Close creator info">×</button>
+        <h3 id="creatorModalTitle">Jh Software Studio</h3>
+        <hr />
+        <p class="creator-title">High Performance Digital Solutions</p>
+        <p class="creator-sub">Optimizando tu potencia digital al maximo.</p>
+        <p class="creator-contact"><a href="mailto:info@jhsoftwarestudio.com">info@jhsoftwarestudio.com</a></p>
+        <p class="creator-contact">(787) 550-8469</p>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

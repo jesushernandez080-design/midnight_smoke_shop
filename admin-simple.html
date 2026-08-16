@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Midnight Smoke Shop - Simple Admin</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #060608;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { margin-bottom: 30px; color: #9b3cff; }
+    
+    .form-section {
+      background: rgba(155, 60, 255, 0.1);
+      border: 2px solid rgba(155, 60, 255, 0.3);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+    }
+    
+    .form-section h2 {
+      color: #9b3cff;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block;
+      color: #bfc0d6;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+    
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(155, 60, 255, 0.2);
+      border-radius: 6px;
+      color: white;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #9b3cff;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    button {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #9b3cff, #6a2cff);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(155, 60, 255, 0.3);
+    }
+    
+    button.secondary {
+      background: rgba(155, 60, 255, 0.2);
+      border: 1px solid rgba(155, 60, 255, 0.3);
+    }
+    
+    .products-list {
+      display: grid;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .product-card {
+      background: rgba(155, 60, 255, 0.05);
+      border: 1px solid rgba(155, 60, 255, 0.1);
+      padding: 15px;
+      border-radius: 6px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 15px;
+      align-items: center;
+    }
+    
+    .product-info h3 {
+      color: white;
+      margin-bottom: 5px;
+    }
+    
+    .product-info p {
+      color: #bfc0d6;
+      font-size: 12px;
+      margin: 3px 0;
+    }
+    
+    .product-price {
+      color: #9b3cff;
+      font-weight: 600;
+    }
+    
+    .product-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .product-actions button {
+      padding: 8px 16px;
+      font-size: 12px;
+    }
+    
+    .message {
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      display: none;
+    }
+    
+    .message.show { display: block; }
+    .message.success { background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.3); color: #0f0; }
+    .message.error { background: rgba(255, 0, 0, 0.1); border: 1px solid rgba(255, 0, 0, 0.3); color: #f00; }
+    
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: #bfc0d6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📦 Midnight Smoke Shop - Admin Panel</h1>
+    
+    <!-- Add Product Form -->
+    <div class="form-section">
+      <h2>✏️ Add New Product</h2>
+      
+      <div id="messageBox" class="message"></div>
+      
+      <form id="productForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Product Name *</label>
+            <input type="text" id="prodName" placeholder="e.g., Premium Vape" required>
+          </div>
+          <div class="form-group">
+            <label>Category *</label>
+            <select id="prodCategory" required>
+              <option value="">-- Select --</option>
+              <option value="vapes">Vapes</option>
+              <option value="accessories">Accessories</option>
+              <option value="concentrates">Concentrates</option>
+              <option value="vip">VIP Line</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Price ($) *</label>
+            <input type="number" id="prodPrice" placeholder="e.g., 89.99" step="0.01" required>
+          </div>
+          <div class="form-group">
+            <label>Product Image (Optional)</label>
+            <input type="file" id="prodImage" accept="image/*">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Description *</label>
+          <textarea id="prodDesc" placeholder="Describe your product..." required></textarea>
+        </div>
+        
+        <div class="button-group">
+          <button type="submit">✅ Save Product</button>
+          <button type="button" class="secondary" onclick="resetForm()">🔄 Clear Form</button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- Products List -->
+    <div class="form-section">
+      <h2>📋 Current Products</h2>
+      <div id="productsList" class="products-list">
+        <div class="empty-state">No products yet. Add one above!</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'midnight_products';
+    
+    // Load products from storage
+    function getProducts() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    }
+    
+    // Save products to storage
+    function saveProducts(products) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+    }
+    
+    // Show message
+    function showMessage(text, type = 'success') {
+      const box = document.getElementById('messageBox');
+      box.textContent = text;
+      box.className = `message show ${type}`;
+      setTimeout(() => {
+        box.classList.remove('show');
+      }, 3000);
+    }
+    
+    // Reset form
+    function resetForm() {
+      document.getElementById('productForm').reset();
+      document.getElementById('prodImage').value = '';
+    }
+    
+    // Render products
+    function renderProducts() {
+      const products = getProducts();
+      const container = document.getElementById('productsList');
+      
+      if (products.length === 0) {
+        container.innerHTML = '<div class="empty-state">No products yet. Add one above!</div>';
+        return;
+      }
+      
+      container.innerHTML = products.map(p => `
+        <div class="product-card">
+          <div class="product-info">
+            <h3>${p.name}</h3>
+            <p><strong>Category:</strong> ${p.category}</p>
+            <p class="product-price">💰 $${p.price.toFixed(2)}</p>
+            <p><strong>Description:</strong> ${p.description.substring(0, 50)}...</p>
+          </div>
+          <div class="product-actions">
+            <button class="secondary" onclick="editProduct(${p.id})">✏️ Edit</button>
+            <button class="secondary" onclick="deleteProduct(${p.id})">🗑️ Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // Edit product
+    function editProduct(id) {
+      const products = getProducts();
+      const product = products.find(p => p.id === id);
+      if (product) {
+        document.getElementById('prodName').value = product.name;
+        document.getElementById('prodCategory').value = product.category;
+        document.getElementById('prodPrice').value = product.price;
+        document.getElementById('prodDesc').value = product.description;
+        document.getElementById('productForm').dataset.editId = id;
+        document.querySelector('h2').textContent = `✏️ Edit Product: ${product.name}`;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+    
+    // Delete product
+    function deleteProduct(id) {
+      if (confirm('Delete this product?')) {
+        let products = getProducts();
+        products = products.filter(p => p.id !== id);
+        saveProducts(products);
+        renderProducts();
+        showMessage('✓ Product deleted', 'success');
+      }
+    }
+    
+    // Form submission
+    document.getElementById('productForm').addEventListener('submit', e => {
+      e.preventDefault();
+      
+      const name = document.getElementById('prodName').value.trim();
+      const category = document.getElementById('prodCategory').value;
+      const price = parseFloat(document.getElementById('prodPrice').value);
+      const desc = document.getElementById('prodDesc').value.trim();
+      
+      if (!name || !category || !price || !desc) {
+        showMessage('❌ Please fill all fields', 'error');
+        return;
+      }
+      
+      let products = getProducts();
+      const editId = parseInt(document.getElementById('productForm').dataset.editId || '0');
+      
+      if (editId > 0) {
+        // Edit
+        const index = products.findIndex(p => p.id === editId);
+        if (index !== -1) {
+          products[index] = {
+            id: editId,
+            name,
+            category,
+            price,
+            description: desc,
+            image: ''
+          };
+        }
+        document.getElementById('productForm').dataset.editId = '';
+        document.querySelector('h2').textContent = '✏️ Add New Product';
+        showMessage('✓ Product updated!', 'success');
+      } else {
+        // Add new
+        const newProduct = {
+          id: Math.max(...products.map(p => p.id), 0) + 1,
+          name,
+          category,
+          price,
+          description: desc,
+          image: ''
+        };
+        products.push(newProduct);
+        showMessage('✓ Product added!', 'success');
+      }
+      
+      saveProducts(products);
+      resetForm();
+      renderProducts();
+    });
+    
+    // Initial render
+    renderProducts();
+  </script>
+</body>
+</html>
