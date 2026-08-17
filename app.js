@@ -12,7 +12,7 @@ const PRODUCTS_DB = [
     category: "vapes",
     price: 89.99,
     description: "Advanced dual-coil design with precision temperature control. Premium vapor production.",
-    image: ""
+    image: "/pictures/foto4.jpg"
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ const PRODUCTS_DB = [
     category: "vapes",
     price: 129.99,
     description: "Ultra-portable with ceramic chamber. Perfect for on-the-go sessions.",
-    image: ""
+    image: "/pictures/foto5.jpg"
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ const PRODUCTS_DB = [
     category: "vapes",
     price: 249.99,
     description: "Premium desktop experience with hybrid heating. Handcrafted precision.",
-    image: ""
+    image: "/pictures/foto6.jpg"
   },
   {
     id: 4,
@@ -36,7 +36,7 @@ const PRODUCTS_DB = [
     category: "accessories",
     price: 65.00,
     description: "Mouth-blown obsidian-tinted glass. Collectible artisan piece.",
-    image: ""
+    image: "/pictures/foto7.jpg"
   },
   {
     id: 5,
@@ -44,7 +44,7 @@ const PRODUCTS_DB = [
     category: "accessories",
     price: 34.99,
     description: "Complete maintenance set with premium brushes and solutions.",
-    image: ""
+    image: "/pictures/foto8.jpg"
   },
   {
     id: 6,
@@ -52,7 +52,7 @@ const PRODUCTS_DB = [
     category: "accessories",
     price: 45.00,
     description: "Protective carry case with neon-lined interior. Lifetime warranty.",
-    image: ""
+    image: "/pictures/foto9.jpg"
   },
   {
     id: 7,
@@ -60,7 +60,7 @@ const PRODUCTS_DB = [
     category: "concentrates",
     price: 54.99,
     description: "Fresh frozen concentrate. High terpene profile.",
-    image: ""
+    image: "/pictures/foto10.jpg"
   },
   {
     id: 8,
@@ -68,7 +68,7 @@ const PRODUCTS_DB = [
     category: "concentrates",
     price: 44.99,
     description: "Full-spectrum solventless extract. Clean and potent.",
-    image: ""
+    image: "/pictures/foto11.jpg"
   },
   {
     id: 9,
@@ -76,7 +76,7 @@ const PRODUCTS_DB = [
     category: "concentrates",
     price: 59.99,
     description: "Fresh rosin press. Golden color, excellent terps.",
-    image: ""
+    image: "/pictures/foto12.png"
   },
   {
     id: 10,
@@ -84,7 +84,7 @@ const PRODUCTS_DB = [
     category: "vip",
     price: 399.99,
     description: "Exclusive limited-edition package. VIP members only.",
-    image: ""
+    image: "/pictures/foto1.jpg"
   },
   {
     id: 11,
@@ -92,7 +92,7 @@ const PRODUCTS_DB = [
     category: "vip",
     price: 599.99,
     description: "Premium curated selection. Includes exclusive accessories.",
-    image: ""
+    image: "/pictures/foto2.jpg"
   },
   {
     id: 12,
@@ -100,7 +100,7 @@ const PRODUCTS_DB = [
     category: "vip",
     price: 899.99,
     description: "Ultimate collection with concierge service included.",
-    image: ""
+    image: "/pictures/foto3.jpg"
   }
 ];
 
@@ -343,22 +343,6 @@ const productsGrid = document.getElementById('productsGrid');
 const tabBtns = document.querySelectorAll('.tab-btn');
 let currentCategory = 'all';
 
-function showCategoryGallery(category) {
-  const galleries = document.querySelectorAll('.category-gallery');
-  galleries.forEach(g => g.style.display = 'none');
-  
-  if (category === 'vapes') {
-    const vapesGallery = document.getElementById('vapesGallery');
-    if (vapesGallery) vapesGallery.style.display = 'block';
-  } else if (category === 'accessories') {
-    const accessoriesGallery = document.getElementById('accessoriesGallery');
-    if (accessoriesGallery) accessoriesGallery.style.display = 'block';
-  } else if (category === 'concentrates') {
-    const concentratesGallery = document.getElementById('concentratesGallery');
-    if (concentratesGallery) concentratesGallery.style.display = 'block';
-  }
-}
-
 function renderProducts(category = 'all') {
   const products = getProducts();
   const user = currentUser();
@@ -406,7 +390,6 @@ tabBtns.forEach(btn => {
       if (b !== e.target) b.setAttribute('aria-selected', 'false');
     });
     renderProducts(currentCategory);
-    showCategoryGallery(currentCategory);
   });
 });
 
