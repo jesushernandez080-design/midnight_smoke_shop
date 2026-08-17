@@ -343,6 +343,22 @@ const productsGrid = document.getElementById('productsGrid');
 const tabBtns = document.querySelectorAll('.tab-btn');
 let currentCategory = 'all';
 
+function showCategoryGallery(category) {
+  const galleries = document.querySelectorAll('.category-gallery');
+  galleries.forEach(g => g.style.display = 'none');
+  
+  if (category === 'vapes') {
+    const vapesGallery = document.getElementById('vapesGallery');
+    if (vapesGallery) vapesGallery.style.display = 'block';
+  } else if (category === 'accessories') {
+    const accessoriesGallery = document.getElementById('accessoriesGallery');
+    if (accessoriesGallery) accessoriesGallery.style.display = 'block';
+  } else if (category === 'concentrates') {
+    const concentratesGallery = document.getElementById('concentratesGallery');
+    if (concentratesGallery) concentratesGallery.style.display = 'block';
+  }
+}
+
 function renderProducts(category = 'all') {
   const products = getProducts();
   const user = currentUser();
@@ -390,6 +406,7 @@ tabBtns.forEach(btn => {
       if (b !== e.target) b.setAttribute('aria-selected', 'false');
     });
     renderProducts(currentCategory);
+    showCategoryGallery(currentCategory);
   });
 });
 
